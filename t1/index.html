@@ -1,0 +1,40 @@
+<!-- Create file index.html with contents ... -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Fun TidBit on Character Encoding:  
+		     	Necessary Definitions: 
+		     	`glyph`: a graphical symbol like A, B, H, ~
+			`grapheme`: a glyph associated with a particular sound
+			`codepoint`: a # corresponding to a specific grapheme
+			
+			Explanation:
+			An `encoding` is an assignment of codepoints to sequence of bytes. In
+	       		practice we have some standard encodings, a simple one is ASCII. However,
+			we need a larger encoding to encompass all the worlds graphemes, not just 
+			European ones, Unicode refers to one such `abstract character set`, `utf-8`
+			is one such encoding of that abstract character set.	
+		--> 
+		<meta charset="utf-8">
+		<title>Hello World</title>
+	</head>
+	<body>
+		<div id="content">
+			<div id="about">
+				<b>Welcome!</b> I am <a href="https://github.com/adamocarolli">Adam</a> and this is my first webpage.<br>
+				Below is the most flattering picture I could find of myself that lets me add an <em>Easter Egg!</em><br>
+			</div>
+			<div id="pic">
+				<img src="images/adam.jpg" alt="Adam has left!" width="400"
+				  onmouseover="this.src='images/rainbow_adam.jpg'"
+				  onmouseout="this.src='images/adam.jpg'">	
+			</div>
+			<div id="contact">
+				<article>
+					Written by: Adamo Carolli<br>
+					Contact at: <a href="https://github.com/adamocarolli">My GitHub Page</a><br>
+				</article>
+			</div>
+		</div>
+	</body>
+</html>
