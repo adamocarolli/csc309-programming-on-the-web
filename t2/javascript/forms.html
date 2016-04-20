@@ -11,8 +11,8 @@
 				// Exercise: Fix this
 			}
 			function addNumbers(){
-				var num1=document.addNumbersForm.num1.value;
-				var num2=document.addNumbersForm.num2.value;
+				var num1=parseInt(document.addNumbersForm.num1.value);
+				var num2=parseInt(document.addNumbersForm.num2.value);
 				document.addNumbersForm.answer.value=num1+num2; // oops
 				// Exercise: fix this
 				
@@ -22,7 +22,29 @@
 				// is or is not prime. A number >2 is prime if the only
 				// integer divisors are 1 and itself. See the % operator.
 				// 20%12==8.
-				alert(document.isPrimeForm.number.value);
+				isPrimeForm.number = document.isPrimeForm.number;
+				isPrimeForm.answer = document.isPrimeForm.answer;
+				var value = parseInt(isPrimeForm.number.value);
+
+				// Check validity and special cases of input
+				if (isNaN(value)) {
+					isPrimeForm.answer.value = Number.NaN;
+					return;
+				} else if (value < 2) {
+					isPrimeForm.answer.value = "No";
+					return;
+				}
+
+				// Check whether a divisor that is neither
+				// 1 nor itself has been found
+				for (var i = 2; i <= Math.ceil(Math.sqrt(value)); i++) {
+					if ((value % i) == 0) {
+						isPrimeForm.answer.value = "No";
+						return;
+					}  
+				}
+
+				isPrimeForm.answer.value = "Yes";
 			}
 
 			// secretNumber is a global variable
@@ -33,6 +55,17 @@
 				// be displayed in the answer text box.
 				// Keep track of the number of guesses the user has made.
 				// How about removing the 'answer' textbox and displaying the status in the div.
+				numberGuessForm.number = document.numberGuessForm.number;
+				numberGuessForm.guessGameStatus = document.getElementById("guessGameStatus");
+				var value = parseInt(numberGuessForm.number.value);
+
+				if (value > secretNumber) {
+					numberGuessForm.guessGameStatus.innerHTML = "Too high";
+				} else if (value < secretNumber) {
+					numberGuessForm.guessGameStatus.innerHTML = "Too low";
+				} else {
+					numberGuessForm.guessGameStatus.innerHTML = "Correct";
+				}
 			}
 		</script>
 	</head>
@@ -60,7 +93,7 @@
 		<form name="numberGuessForm">
 			<input type="text" size="3" id="number"/> 
 			<input type="button" value="Am I Right?" onclick="checkGuess();"/>
-			<input type="text" size="10" id="answer"/>
+			<!-- <input type="text" size="10" id="answer"/> -->
 			<div id="guessGameStatus"></div>
 		</form>
 	</body>
