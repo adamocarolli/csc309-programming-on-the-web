@@ -12,10 +12,16 @@
 		var board=[1,1,1,0,-1,-1,-1];
 		function clickSquare(i){
 			// You will remove the four lines below...(what does this do?)
-			var s1=document.getElementById('square'+0);
-			var s2=document.getElementById('square'+i);
-			s1.src=s2.src;
-			s2.src='images/empty.gif';
+			// var s1=document.getElementById('square'+0);
+			// var s2=document.getElementById('square'+i);
+			// s1.src=s2.src;
+			// s2.src='images/empty.gif';
+
+			// Answer: The above switches the src image of the leftmost
+			//		   table data element to the clicked table data 
+			//		   element. The clicked element's src is then changed
+			//		   to an empty image.
+
 
 			// a frog can move either to the adjacent (empty) square
 			// or jump a frog to move to the empty square.
@@ -24,6 +30,9 @@
 			move(i,i+2*board[i]);
 
 			// Let the user know if they won the puzzle.
+			if(isWon()) {
+				console.log("Won!");
+			}
 		}
 
 		// Try to move from position i to position j
@@ -33,19 +42,33 @@
 			// then move the frog at square i to square j
 			// this involves modifying both board[] and the images
 			// at those two positions
+			var si = document.getElementById('square'+i);
+			var sj = document.getElementById('square'+j);
 
+			// Check no frog occupies empty square
+			if (!isEmpty(j)) {
+				return false;
+			}
+
+			sj.src = si.src;
+			si.src = 'images/empty.gif';
+			board[j] = board[i];
+			board[i] = 0;
+			return true;
 		}
 
 		// return false if i is not a valid position
 		// return true if position i is empty
 		// return false otherwise
 		function isEmpty(i){
-
+			return board[i] == 0;
 		}
 
 		// return whether the user has won the game
+		var winningBoard = [-1,-1,-1,0,1,1,1];
 		function isWon(){
-
+			// Note: Equality works only if list is of same order
+			return board.toString() == winningBoard.toString(); 
 		}
 
 		// Add a timer which constantly displays the amount of time
