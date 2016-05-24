@@ -49,6 +49,10 @@ header.menu {
   text-decoration: underline;
 }
 
+li.menu-item {
+  font-family: 'PT Serif', serif;
+}
+
 section.content {
   border-radius: 25px;
   background-color: lightblue;
